@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title> Motivational Message app </title>
+		<style>
+			*{font-size:50px; font-family:Cambria;}
+			body {background-image:url('StockCake-Misty Mountain View_1720445999.jpg' );}
+			h2{margin: 40px 0;border:solid;border-radius:40px;color:aqua;}
+			h1{margin: 40px 0;color:light green;}
+			input[type="submit"]{border-radius:40px;background-color:#00bfff;color:black;}
+			
+		</style>
+</head>
+<body>
+<center>
+	<h1>Motivational msg</h1>
+	<form onSubmit="gm(event)">
+	<input type="submit" value="Get Message"/>
+	</form>
+		
+	<h2 id="msg"></h2>
+	<h2 id="aut"></h2>
+</center>
+	<script>
+
+			function gm(event)
+			{
+				event.preventDefault();
+					let msg=document.getElementById("msg");
+					let aut=document.getElementById("aut");
+					
+					let url="https://quotes-api-self.vercel.app/quote";
+					fetch(url)
+					.then(res=>res.json())
+					.then(data=>{
+									msg.innerHTML=data.quote ? data.quote :"Quote not Available";
+									aut.innerHTML=data.author ? data.author : "Unkown Author";
+					})
+					.catch(err=>msg.innerHTML="issue"+err);
+			}
+		
+	</script>
+
+</body>
+</html>
